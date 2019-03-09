@@ -25,6 +25,7 @@ class ProfileFeedPresenter(
 
     override fun refreshWithCoroutines() {
         refreshWithCoroutinesConcat()
+        //refreshWithCoroutinesFlatMap()
     }
 
     override fun refreshWithRx() {

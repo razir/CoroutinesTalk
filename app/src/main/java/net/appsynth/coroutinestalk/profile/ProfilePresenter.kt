@@ -4,6 +4,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.*
+import net.appsynth.coroutinestalk.DispatchersProvider
 import net.appsynth.coroutinestalk.api.ProfileApiCoroutines
 import net.appsynth.coroutinestalk.api.ProfileApiRx
 import net.appsynth.coroutinestalk.extensions.addTo
@@ -16,13 +17,13 @@ class ProfilePresenter(
 ) : ProfileContract.Presenter, CoroutineScope {
 
     private var job = Job()
-    override val coroutineContext: CoroutineContext = job + Dispatchers.Main
+    override val coroutineContext: CoroutineContext = job + DispatchersProvider.Main
 
 
     override fun refreshWithCoroutines() {
         launch {
             try {
-                val profileData = withContext(Dispatchers.IO) {
+                val profileData = withContext(DispatchersProvider.IO) {
                     profileApiCoroutines.getProfile()
                 }
                 view?.showUserData(profileData.firstName, profileData.lastName)
