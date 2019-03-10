@@ -61,6 +61,10 @@ class ProfileFeedPresenterTest {
         verify(view, never()).showError()
     }
 
+    /**
+     * Implement tests for success case here
+     * You can use [ProfilePresenterTest.testCoroutinesSuccess] for the reference
+     */
     @Test
     fun testCoroutinesSuccess() {
 
@@ -77,6 +81,10 @@ class ProfileFeedPresenterTest {
         verify(view).showError()
     }
 
+    /**
+     * Implement tests for success case here
+     * You can use [ProfilePresenterTest.testCoroutinesFailure] for the reference
+     */
     @Test
     fun testCoroutinesFailure() {
 
