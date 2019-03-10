@@ -6,6 +6,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.*
+import net.appsynth.coroutinestalk.DispatchersProvider
 import net.appsynth.coroutinestalk.api.ProfileApiCoroutines
 import net.appsynth.coroutinestalk.api.ProfileApiRx
 import net.appsynth.coroutinestalk.extensions.addTo
@@ -20,7 +21,7 @@ class ProfileFeedPresenter(
 ) : ProfileFeedContract.Presenter, CoroutineScope {
 
     private var job = Job()
-    override val coroutineContext: CoroutineContext = job + Dispatchers.Main
+    override val coroutineContext: CoroutineContext = job + DispatchersProvider.Main
 
 
     override fun refreshWithCoroutines() {
@@ -36,10 +37,10 @@ class ProfileFeedPresenter(
     private fun refreshWithCoroutinesConcat() {
         launch {
             try {
-                val profileDeferred = async(Dispatchers.IO) {
+                val profileDeferred = async(DispatchersProvider.IO) {
                     profileApiCoroutines.getProfile()
                 }
-                val feedDeferred = async(Dispatchers.IO) {
+                val feedDeferred = async(DispatchersProvider.IO) {
                     profileApiCoroutines.getUserActivity()
                 }
                 val profileData = profileDeferred.await()
