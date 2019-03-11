@@ -67,7 +67,15 @@ class ProfileFeedPresenterTest {
      */
     @Test
     fun testCoroutinesSuccess() {
+        val feed = listOf(UserActivity("running", "today"), UserActivity("sleep", "last year"))
+        val profile = Profile("Appsynth", "Asia")
 
+        //Add your code here
+
+        presenter.refreshWithCoroutines()
+        verify(view).showUserData("Appsynth", "Asia")
+        verify(view).showUserFeed("today: running\nlast year: sleep")
+        verify(view, never()).showError()
     }
 
     @Test
@@ -88,5 +96,9 @@ class ProfileFeedPresenterTest {
     @Test
     fun testCoroutinesFailure() {
 
+        //Add your code here
+
+        presenter.refreshWithCoroutines()
+        verify(view).showError()
     }
 }
